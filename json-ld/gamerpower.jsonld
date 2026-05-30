@@ -1,0 +1,14 @@
+{
+  "@context": "https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-ld/gamerpower-context.jsonld",
+  "@type": "schema:WebAPI",
+  "schema:name": "GamerPower API",
+  "schema:description": "Free, no-authentication REST API aggregating live game giveaways across PC, console, mobile, VR, and DRM-free platforms. Tracks free games, beta keys, DLC drops, and in-game loot offers, with USD worth aggregation.",
+  "schema:provider": {
+    "@type": "schema:Organization",
+    "schema:name": "GamerPower",
+    "schema:url": "https://www.gamerpower.com"
+  },
+  "schema:url": "https://www.gamerpower.com/api-read",
+  "schema:documentation": "https://www.gamerpower.com/api-read",
+  "schema:termsOfService": "https://www.gamerpower.com/api-read"
+}

@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-schema/gamerpower-giveaway-schema.json",
+  "title": "Giveaway",
+  "description": "A single live giveaway record (free game, beta key, DLC, or loot offer).",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "worth",
+    "thumbnail",
+    "image",
+    "description",
+    "instructions",
+    "open_giveaway_url",
+    "published_date",
+    "type",
+    "platforms",
+    "end_date",
+    "users",
+    "status",
+    "gamerpower_url"
+  ],
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Numeric identifier of the giveaway.",
+      "example": 3664
+    },
+    "title": {
+      "type": "string",
+      "description": "Human-readable title of the giveaway.",
+      "example": "Moonrise Fall (Steam) Giveaway"
+    },
+    "worth": {
+      "type": "string",
+      "description": "USD worth as a formatted string (e.g. \"$9.99\"). May be \"N/A\" when no retail value applies.",
+      "example": "$9.99"
+    },
+    "thumbnail": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL of the small thumbnail image.",
+      "example": "https://www.gamerpower.com/offers/1/6a1b24ffbbc52.jpg"
+    },
+    "image": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL of the large promotional image.",
+      "example": "https://www.gamerpower.com/offers/1b/6a1b24ffbbc52.jpg"
+    },
+    "description": {
+      "type": "string",
+      "description": "Marketing description of the giveaway.",
+      "example": "Download Moonrise Fall for free on Steam until June 2!"
+    },
+    "instructions": {
+      "type": "string",
+      "description": "Step-by-step instructions for claiming the giveaway. Newline-separated steps.",
+      "example": "1. Click the button to visit the giveaway page.\n2. Download via Steam."
+    },
+    "open_giveaway_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Tracked redirect URL that opens the upstream provider page for claiming.",
+      "example": "https://www.gamerpower.com/open/moonrise-fall-steam-giveaway"
+    },
+    "published_date": {
+      "type": "string",
+      "description": "Date and time the giveaway was published on GamerPower (YYYY-MM-DD HH:MM:SS UTC).",
+      "example": "2026-05-30 13:57:19"
+    },
+    "type": {
+      "type": "string",
+      "description": "Category of the offer (Game, DLC, Loot, Early Access, etc.).",
+      "example": "Game"
+    },
+    "platforms": {
+      "type": "string",
+      "description": "Comma-separated list of human-readable platform names the offer applies to.",
+      "example": "PC, Steam"
+    },
+    "end_date": {
+      "type": "string",
+      "description": "Date and time the giveaway expires (YYYY-MM-DD HH:MM:SS UTC) or \"N/A\".",
+      "example": "2026-06-02 23:59:00"
+    },
+    "users": {
+      "type": "integer",
+      "description": "Count of GamerPower users who have viewed or claimed the giveaway.",
+      "example": 1310
+    },
+    "status": {
+      "type": "string",
+      "description": "Lifecycle status of the giveaway.",
+      "enum": ["Active", "Expired"],
+      "example": "Active"
+    },
+    "gamerpower_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Canonical GamerPower page URL for the giveaway.",
+      "example": "https://www.gamerpower.com/moonrise-fall-steam-giveaway"
+    },
+    "open_giveaway": {
+      "type": "string",
+      "format": "uri",
+      "description": "Alias of open_giveaway_url. Present on list responses; omitted on single-giveaway lookups.",
+      "example": "https://www.gamerpower.com/open/moonrise-fall-steam-giveaway"
+    }
+  }
+}

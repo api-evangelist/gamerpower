@@ -1,0 +1,58 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: GamerPower
+providerId: gamerpower
+created: '2026-05-30'
+modified: '2026-05-30'
+tags:
+  - Games And Comics
+  - Giveaways
+  - Rate Limiting
+  - Throttling
+description: Machine-readable rate limit definitions for the GamerPower API. The public API documents a
+  single recommended client-side ceiling of 4 requests per second; sustained traffic above that may be
+  throttled at the upstream. No published per-key monthly quota exists on the direct API. A separate
+  hosted offering on RapidAPI applies marketplace-tier limits which override these defaults.
+headers:
+  limit: null
+  remaining: null
+  reset: null
+  retryAfter: Retry-After
+  policy: null
+responseCodes:
+  throttled: 429
+  serviceUnavailable: 500
+limits:
+  - tier: free-public
+    name: Recommended Client Ceiling
+    scope: ip
+    metric: requests_per_second
+    limit: 4
+    timeFrame: second
+    applies:
+      - GamerPower API
+  - tier: rapidapi
+    name: RapidAPI Marketplace Tier
+    scope: api-key
+    metric: requests_per_second
+    limit: -1
+    timeFrame: second
+    applies:
+      - GamerPower API
+policies:
+  - name: Client-Side Self-Throttling
+    description: GamerPower asks consumers to keep traffic under 4 requests/second per client to avoid
+      being throttled or banned at the edge.
+  - name: Backoff Strategy
+    description: Clients should implement exponential backoff with jitter when receiving 5xx responses,
+      honoring the Retry-After header when present.
+  - name: Attribution Requirement
+    description: All consumers (personal and commercial) must visibly attribute GamerPower.com as the
+      data source. This is a usage policy enforced socially, not via headers.
+  - name: Marketplace Override
+    description: Consumers using the RapidAPI marketplace listing are governed by RapidAPI's tier-based
+      quotas, which override the recommended client-side ceiling.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

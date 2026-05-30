@@ -1,0 +1,86 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: GamerPower — Filter
+  description: 'GamerPower — Filter. 1 operation. Lead operation: Filter Giveaways By Multiple Values. Self-contained Naftiko capability covering multi-value platform/type filtering with dot-separated values.'
+  tags:
+  - GamerPower
+  - Filter
+  - Games
+  created: '2026-05-30'
+  modified: '2026-05-30'
+binds: []
+capability:
+  consumes:
+  - type: http
+    namespace: gamerpower-filter
+    baseUri: https://www.gamerpower.com/api
+    description: GamerPower — Filter business capability. Self-contained, no shared references.
+    resources:
+    - name: filter
+      path: /filter
+      operations:
+      - name: filterGiveaways
+        method: GET
+        description: Filter Giveaways By Multiple Values
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: array
+          value: $.
+        inputParameters:
+        - name: platform
+          in: query
+          type: string
+          required: false
+          description: Dot-separated platform slugs (e.g. epic-games-store.steam).
+        - name: type
+          in: query
+          type: string
+          required: false
+          description: Dot-separated giveaway types (e.g. game.loot).
+        - name: sort-by
+          in: query
+          type: string
+          required: false
+          description: Sort key (date, value, popularity).
+  exposes:
+  - type: rest
+    namespace: gamerpower-filter-rest
+    port: 8080
+    description: REST adapter for GamerPower — Filter. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/filter
+      name: v1-filter
+      description: REST surface for multi-value giveaway filtering.
+      operations:
+      - method: GET
+        name: filterGiveaways
+        description: Filter Giveaways By Multiple Values
+        call: gamerpower-filter.filterGiveaways
+        with:
+          platform: rest.platform
+          type: rest.type
+          sort-by: rest.sort-by
+        outputParameters:
+        - type: array
+          mapping: $.
+  - type: mcp
+    namespace: gamerpower-filter-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for GamerPower — Filter. One tool per consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: filter-giveaways
+      description: Filter live giveaways by multiple platforms and types using dot-separated values.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gamerpower-filter.filterGiveaways
+      with:
+        platform: tools.platform
+        type: tools.type
+        sort-by: tools.sort-by
+      outputParameters:
+      - type: array
+        mapping: $.

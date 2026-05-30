@@ -1,0 +1,337 @@
+extends:
+  - spectral:oas
+
+aliases:
+  PathItem:
+    - "$.paths[*]"
+  Operation:
+    - "$.paths[*][get,post,put,patch,delete]"
+
+rules:
+  # INFO / METADATA
+  info-title-format:
+    description: API title must begin with "GamerPower".
+    message: 'info.title must start with "GamerPower"'
+    severity: error
+    given: $.info.title
+    then:
+      function: pattern
+      functionOptions:
+        match: "^GamerPower"
+
+  info-description-required:
+    description: API info.description is required and must be at least 40 characters.
+    message: 'info.description must be present and >= 40 characters'
+    severity: error
+    given: $.info
+    then:
+      - field: description
+        function: truthy
+      - field: description
+        function: length
+        functionOptions:
+          min: 40
+
+  info-version-required:
+    description: API info.version is required.
+    severity: error
+    given: $.info
+    then:
+      field: version
+      function: truthy
+
+  info-contact-required:
+    description: API info.contact must reference GamerPower.
+    severity: warn
+    given: $.info.contact
+    then:
+      field: name
+      function: pattern
+      functionOptions:
+        match: "GamerPower"
+
+  # OPENAPI VERSION
+  openapi-version-3-1:
+    description: Use OpenAPI 3.1.x.
+    message: 'openapi version must be 3.1.x'
+    severity: warn
+    given: $.openapi
+    then:
+      function: pattern
+      functionOptions:
+        match: "^3\\.1\\."
+
+  # SERVERS
+  servers-required:
+    description: At least one server must be declared.
+    severity: error
+    given: $
+    then:
+      field: servers
+      function: truthy
+
+  servers-https-only:
+    description: All server URLs must use HTTPS.
+    severity: error
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: "^https://"
+
+  servers-gamerpower-host:
+    description: Servers must use the canonical www.gamerpower.com host.
+    severity: warn
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: "^https://www\\.gamerpower\\.com/api"
+
+  # PATHS
+  paths-kebab-or-lowercase:
+    description: Path segments must be lowercase (no uppercase letters or underscores).
+    message: 'path "{{value}}" must use lowercase letters only'
+    severity: warn
+    given: "$.paths[*]~"
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: "[A-Z_]"
+
+  paths-no-trailing-slash:
+    description: Paths must not end with a trailing slash.
+    severity: error
+    given: "$.paths[*]~"
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: ".+/$"
+
+  paths-no-query-string:
+    description: Paths must not contain query strings.
+    severity: error
+    given: "$.paths[*]~"
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: "\\?"
+
+  # OPERATIONS
+  operation-operationId-required:
+    description: Every operation must declare an operationId.
+    severity: error
+    given: "#Operation"
+    then:
+      field: operationId
+      function: truthy
+
+  operation-operationId-camelcase:
+    description: operationId must be camelCase.
+    message: 'operationId "{{value}}" must be camelCase'
+    severity: warn
+    given: "#Operation.operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]*$"
+
+  operation-summary-required:
+    description: Every operation must have a summary.
+    severity: error
+    given: "#Operation"
+    then:
+      field: summary
+      function: truthy
+
+  operation-summary-gamerpower-prefix:
+    description: Operation summaries must begin with "GamerPower".
+    message: 'summary "{{value}}" must start with "GamerPower"'
+    severity: warn
+    given: "#Operation.summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^GamerPower "
+
+  operation-description-required:
+    description: Every operation must have a description.
+    severity: warn
+    given: "#Operation"
+    then:
+      field: description
+      function: truthy
+
+  operation-tags-required:
+    description: Every operation must declare at least one tag.
+    severity: error
+    given: "#Operation"
+    then:
+      field: tags
+      function: length
+      functionOptions:
+        min: 1
+
+  operation-get-only:
+    description: The GamerPower API is read-only; only GET methods are permitted.
+    message: 'method "{{property}}" is not allowed; GamerPower exposes only GET'
+    severity: error
+    given: "#PathItem"
+    then:
+      field: "@key"
+      function: pattern
+      functionOptions:
+        notMatch: "^(post|put|patch|delete)$"
+
+  # TAGS
+  tags-global-array:
+    description: Global tags array must be defined with descriptions.
+    severity: warn
+    given: $
+    then:
+      field: tags
+      function: truthy
+
+  tag-title-case:
+    description: Tag names must use Title Case.
+    message: 'tag "{{value}}" must use Title Case'
+    severity: warn
+    given: $.tags[*].name
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][A-Za-z0-9-]*( [A-Z][A-Za-z0-9-]*)*$"
+
+  tag-description-required:
+    description: Every tag must have a description.
+    severity: warn
+    given: $.tags[*]
+    then:
+      field: description
+      function: truthy
+
+  # PARAMETERS
+  parameter-description-required:
+    description: Every parameter must declare a description.
+    severity: warn
+    given: "#Operation.parameters[*]"
+    then:
+      field: description
+      function: truthy
+
+  parameter-schema-required:
+    description: Every parameter must declare a schema.
+    severity: error
+    given: "#Operation.parameters[*]"
+    then:
+      field: schema
+      function: truthy
+
+  parameter-sort-by-kebab:
+    description: The sort key parameter must be exactly `sort-by` (kebab-case) to match the live API.
+    severity: warn
+    given: "#Operation.parameters[?(@.in == 'query')].name"
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: "^(sortBy|sort_by)$"
+
+  # RESPONSES
+  response-200-required:
+    description: Every operation must declare a 200 response.
+    severity: error
+    given: "#Operation.responses"
+    then:
+      field: "200"
+      function: truthy
+
+  response-description-required:
+    description: Every response must include a description.
+    severity: error
+    given: "#Operation.responses[*]"
+    then:
+      field: description
+      function: truthy
+
+  response-json-content:
+    description: 2xx and 4xx responses must define application/json content.
+    severity: warn
+    given:
+      - "#Operation.responses['200'].content"
+      - "#Operation.responses['201'].content"
+      - "#Operation.responses['404'].content"
+      - "#Operation.responses['500'].content"
+    then:
+      field: application/json
+      function: truthy
+
+  # SCHEMAS
+  schema-description-required:
+    description: Every component schema must have a description.
+    severity: warn
+    given: $.components.schemas[*]
+    then:
+      field: description
+      function: truthy
+
+  schema-status-envelope:
+    description: The StatusEnvelope schema must include both `status` and `status_message`.
+    severity: warn
+    given: $.components.schemas.StatusEnvelope.properties
+    then:
+      - field: status
+        function: truthy
+      - field: status_message
+        function: truthy
+
+  schema-giveaway-required-fields:
+    description: The Giveaway schema must declare its core identifying and lifecycle fields as required.
+    severity: warn
+    given: $.components.schemas.Giveaway
+    then:
+      field: required
+      function: length
+      functionOptions:
+        min: 10
+
+  schema-platform-enum-defined:
+    description: The Platform schema must enumerate the supported platform slugs.
+    severity: error
+    given: $.components.schemas.Platform
+    then:
+      field: enum
+      function: truthy
+
+  schema-giveaway-type-enum:
+    description: The GiveawayType schema must enumerate game, loot, beta.
+    severity: error
+    given: $.components.schemas.GiveawayType
+    then:
+      field: enum
+      function: truthy
+
+  schema-sortby-enum:
+    description: The SortBy schema must enumerate date, value, popularity.
+    severity: error
+    given: $.components.schemas.SortBy
+    then:
+      field: enum
+      function: truthy
+
+  # SECURITY
+  security-none-required:
+    description: The GamerPower API is fully open and must not declare a security scheme.
+    severity: warn
+    given: $
+    then:
+      field: security
+      function: falsy
+
+  # MICROCKS
+  operation-microcks-extension:
+    description: Operations should include x-microcks-operation for mock server compatibility.
+    severity: info
+    given: "#Operation"
+    then:
+      field: x-microcks-operation
+      function: truthy

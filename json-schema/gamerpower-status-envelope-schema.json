@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-schema/gamerpower-status-envelope-schema.json",
+  "title": "StatusEnvelope",
+  "description": "Status envelope returned when an endpoint returns no result, a not-found, or a server-side error.",
+  "type": "object",
+  "required": ["status", "status_message"],
+  "properties": {
+    "status": {
+      "type": "integer",
+      "description": "Numeric status code (0 indicates no result / not found).",
+      "example": 0
+    },
+    "status_message": {
+      "type": "string",
+      "description": "Human-readable status message.",
+      "example": "No object found, please check the correct parameters."
+    }
+  }
+}

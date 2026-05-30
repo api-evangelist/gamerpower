@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-structure/gamerpower-giveaway-structure.json",
+  "name": "Giveaway",
+  "description": "A single live giveaway record (free game, beta key, DLC, or loot offer).",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "worth",
+    "thumbnail",
+    "image",
+    "description",
+    "instructions",
+    "open_giveaway_url",
+    "published_date",
+    "type",
+    "platforms",
+    "end_date",
+    "users",
+    "status",
+    "gamerpower_url"
+  ],
+  "properties": {
+    "id": {"type": "integer", "description": "Numeric identifier."},
+    "title": {"type": "string", "description": "Title of the giveaway."},
+    "worth": {"type": "string", "description": "USD worth as a formatted string."},
+    "thumbnail": {"type": "string", "format": "uri", "description": "Thumbnail image URL."},
+    "image": {"type": "string", "format": "uri", "description": "Large promotional image URL."},
+    "description": {"type": "string", "description": "Marketing description."},
+    "instructions": {"type": "string", "description": "Step-by-step claim instructions."},
+    "open_giveaway_url": {"type": "string", "format": "uri", "description": "Tracked redirect URL."},
+    "published_date": {"type": "string", "description": "Published date (UTC)."},
+    "type": {"type": "string", "description": "Category (Game, DLC, Loot, Early Access, etc.)."},
+    "platforms": {"type": "string", "description": "Comma-separated platforms."},
+    "end_date": {"type": "string", "description": "Expiration date (UTC) or N/A."},
+    "users": {"type": "integer", "description": "User popularity count."},
+    "status": {"type": "string", "enum": ["Active", "Expired"], "description": "Lifecycle status."},
+    "gamerpower_url": {"type": "string", "format": "uri", "description": "Canonical GamerPower URL."},
+    "open_giveaway": {"type": "string", "format": "uri", "description": "Alias of open_giveaway_url."}
+  }
+}

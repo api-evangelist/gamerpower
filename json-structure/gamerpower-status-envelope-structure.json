@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-structure/gamerpower-status-envelope-structure.json",
+  "name": "StatusEnvelope",
+  "description": "Status envelope returned when an endpoint returns no result, a not-found, or a server-side error.",
+  "type": "object",
+  "required": ["status", "status_message"],
+  "properties": {
+    "status": {"type": "integer", "description": "Numeric status code."},
+    "status_message": {"type": "string", "description": "Human-readable status message."}
+  }
+}

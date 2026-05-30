@@ -1,0 +1,435 @@
+openapi: 3.1.0
+info:
+  title: GamerPower API
+  description: |
+    The GamerPower API (gamerpower.com) is a free, no-authentication REST API that
+    aggregates live game giveaways across PC, console, mobile, and DRM-free platforms.
+    It tracks free games, beta keys, DLC drops, and in-game loot offers from sources
+    such as Steam, Epic Games Store, GOG, Ubisoft Connect, EA Origin, itch.io, Battle.net,
+    PlayStation, Xbox, Switch, Android, iOS, and VR. The API returns JSON, supports
+    multi-value platform/type filtering, sorts by date/value/popularity, and exposes
+    a `/worth` endpoint that aggregates the live USD value of the active giveaway pool.
+    Attribution to GamerPower.com is required for personal and commercial use.
+  version: 1.0.0
+  contact:
+    name: GamerPower
+    url: https://www.gamerpower.com/api-read
+  license:
+    name: GamerPower Attribution
+    url: https://www.gamerpower.com/api-read
+  x-generated-from: documentation+live-api
+  x-source-url: https://www.gamerpower.com/api-read
+  x-last-validated: '2026-05-30'
+servers:
+  - url: https://www.gamerpower.com/api
+    description: GamerPower production API
+tags:
+  - name: Giveaways
+    description: List and look up live game giveaways, beta keys, DLC drops, and loot offers.
+  - name: Filter
+    description: Multi-value platform and type filtering using dot-separated values.
+  - name: Worth
+    description: Aggregate live giveaway counts and USD value estimation.
+paths:
+  /giveaways:
+    get:
+      tags:
+        - Giveaways
+      summary: GamerPower List Giveaways
+      description: |
+        Returns all currently live giveaways. Supports optional filtering by `platform`
+        and `type` (single-value here; use `/filter` for multi-value), and sorting via
+        `sort-by`.
+      operationId: listGiveaways
+      parameters:
+        - name: platform
+          in: query
+          required: false
+          description: Filter giveaways by single platform.
+          schema:
+            $ref: '#/components/schemas/Platform'
+          example: epic-games-store
+        - name: type
+          in: query
+          required: false
+          description: Filter giveaways by giveaway type.
+          schema:
+            $ref: '#/components/schemas/GiveawayType'
+          example: game
+        - name: sort-by
+          in: query
+          required: false
+          description: Sort the returned giveaways.
+          schema:
+            $ref: '#/components/schemas/SortBy'
+          example: value
+      responses:
+        '200':
+          description: An array of live giveaways.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GiveawayList'
+              examples:
+                ListGiveaways200Example:
+                  summary: Default listGiveaways 200 response
+                  x-microcks-default: true
+                  value:
+                    - id: 3664
+                      title: Moonrise Fall (Steam) Giveaway
+                      worth: "$9.99"
+                      thumbnail: https://www.gamerpower.com/offers/1/6a1b24ffbbc52.jpg
+                      image: https://www.gamerpower.com/offers/1b/6a1b24ffbbc52.jpg
+                      description: Download Moonrise Fall for free on Steam until June 2!
+                      instructions: "1. Click the button to visit the giveaway page.\r\n2. Download this game directly via Steam before the offer expires.\r\n3. That's it! Have fun!"
+                      open_giveaway_url: https://www.gamerpower.com/open/moonrise-fall-steam-giveaway
+                      published_date: '2026-05-30 13:57:19'
+                      type: Game
+                      platforms: PC, Steam
+                      end_date: '2026-06-02 23:59:00'
+                      users: 1310
+                      status: Active
+                      gamerpower_url: https://www.gamerpower.com/moonrise-fall-steam-giveaway
+                      open_giveaway: https://www.gamerpower.com/open/moonrise-fall-steam-giveaway
+        '201':
+          description: No active giveaways available.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusEnvelope'
+        '404':
+          description: Object or endpoint not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusEnvelope'
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusEnvelope'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /giveaway:
+    get:
+      tags:
+        - Giveaways
+      summary: GamerPower Get Giveaway By ID
+      description: Returns the details of a single giveaway identified by its numeric id.
+      operationId: getGiveaway
+      parameters:
+        - name: id
+          in: query
+          required: true
+          description: Numeric identifier of the giveaway.
+          schema:
+            type: integer
+            minimum: 1
+          example: 3664
+      responses:
+        '200':
+          description: A single giveaway record.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Giveaway'
+              examples:
+                GetGiveaway200Example:
+                  summary: Default getGiveaway 200 response
+                  x-microcks-default: true
+                  value:
+                    id: 3664
+                    title: Moonrise Fall (Steam) Giveaway
+                    worth: "$9.99"
+                    thumbnail: https://www.gamerpower.com/offers/1/6a1b24ffbbc52.jpg
+                    image: https://www.gamerpower.com/offers/1b/6a1b24ffbbc52.jpg
+                    description: Download Moonrise Fall for free on Steam until June 2!
+                    instructions: "1. Click the button to visit the giveaway page.\r\n2. Download this game directly via Steam before the offer expires.\r\n3. That's it! Have fun!"
+                    open_giveaway_url: https://www.gamerpower.com/open/moonrise-fall-steam-giveaway
+                    published_date: '2026-05-30 13:57:19'
+                    type: Game
+                    platforms: PC, Steam
+                    end_date: '2026-06-02 23:59:00'
+                    users: 1840
+                    status: Active
+                    gamerpower_url: https://www.gamerpower.com/moonrise-fall-steam-giveaway
+        '404':
+          description: Giveaway not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusEnvelope'
+              examples:
+                GetGiveaway404Example:
+                  summary: Default getGiveaway 404 response
+                  x-microcks-default: true
+                  value:
+                    status: 0
+                    status_message: No object found, please check the correct parameters.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /filter:
+    get:
+      tags:
+        - Filter
+      summary: GamerPower Filter Giveaways By Multiple Values
+      description: |
+        Returns live giveaways filtered by one or more platforms and one or more
+        giveaway types. Multiple values are dot-separated (e.g. `platform=epic-games-store.steam`
+        and `type=game.loot`).
+      operationId: filterGiveaways
+      parameters:
+        - name: platform
+          in: query
+          required: false
+          description: Dot-separated list of platforms (e.g. `epic-games-store.steam`).
+          schema:
+            type: string
+            pattern: '^[a-z0-9-]+(\.[a-z0-9-]+)*$'
+          example: epic-games-store.steam
+        - name: type
+          in: query
+          required: false
+          description: Dot-separated list of giveaway types (e.g. `game.loot`).
+          schema:
+            type: string
+            pattern: '^(game|loot|beta)(\.(game|loot|beta))*$'
+          example: game.loot
+        - name: sort-by
+          in: query
+          required: false
+          description: Sort the returned giveaways.
+          schema:
+            $ref: '#/components/schemas/SortBy'
+          example: date
+      responses:
+        '200':
+          description: An array of filtered live giveaways.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GiveawayList'
+              examples:
+                FilterGiveaways200Example:
+                  summary: Default filterGiveaways 200 response
+                  x-microcks-default: true
+                  value:
+                    - id: 3664
+                      title: Moonrise Fall (Steam) Giveaway
+                      worth: "$9.99"
+                      thumbnail: https://www.gamerpower.com/offers/1/6a1b24ffbbc52.jpg
+                      image: https://www.gamerpower.com/offers/1b/6a1b24ffbbc52.jpg
+                      description: Download Moonrise Fall for free on Steam until June 2!
+                      instructions: "1. Click the button to visit the giveaway page."
+                      open_giveaway_url: https://www.gamerpower.com/open/moonrise-fall-steam-giveaway
+                      published_date: '2026-05-30 13:57:19'
+                      type: Game
+                      platforms: PC, Steam
+                      end_date: '2026-06-02 23:59:00'
+                      users: 1310
+                      status: Active
+                      gamerpower_url: https://www.gamerpower.com/moonrise-fall-steam-giveaway
+                      open_giveaway: https://www.gamerpower.com/open/moonrise-fall-steam-giveaway
+        '201':
+          description: No giveaways matched the filter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusEnvelope'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /worth:
+    get:
+      tags:
+        - Worth
+      summary: GamerPower Get Total Worth Estimation
+      description: |
+        Returns the count of currently live giveaways and the aggregate USD value
+        estimation of the live giveaway pool.
+      operationId: getWorth
+      responses:
+        '200':
+          description: Aggregate count and USD worth of live giveaways.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorthEstimation'
+              examples:
+                GetWorth200Example:
+                  summary: Default getWorth 200 response
+                  x-microcks-default: true
+                  value:
+                    active_giveaways_number: 102
+                    worth_estimation_usd: '410.83'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Giveaway:
+      type: object
+      description: A single live giveaway record (free game, beta key, DLC, or loot offer).
+      required:
+        - id
+        - title
+        - worth
+        - thumbnail
+        - image
+        - description
+        - instructions
+        - open_giveaway_url
+        - published_date
+        - type
+        - platforms
+        - end_date
+        - users
+        - status
+        - gamerpower_url
+      properties:
+        id:
+          type: integer
+          description: Numeric identifier of the giveaway.
+          example: 3664
+        title:
+          type: string
+          description: Human-readable title of the giveaway.
+          example: Moonrise Fall (Steam) Giveaway
+        worth:
+          type: string
+          description: USD worth as a formatted string (e.g. "$9.99"). May be "N/A" for items with no listed retail value (e.g. in-game loot, beta keys).
+          example: "$9.99"
+        thumbnail:
+          type: string
+          format: uri
+          description: URL of the small thumbnail image.
+          example: https://www.gamerpower.com/offers/1/6a1b24ffbbc52.jpg
+        image:
+          type: string
+          format: uri
+          description: URL of the large promotional image.
+          example: https://www.gamerpower.com/offers/1b/6a1b24ffbbc52.jpg
+        description:
+          type: string
+          description: Marketing description of the giveaway.
+          example: Download Moonrise Fall for free on Steam until June 2!
+        instructions:
+          type: string
+          description: Step-by-step instructions for claiming the giveaway. Newline-separated steps.
+          example: "1. Click the button to visit the giveaway page.\r\n2. Download this game directly via Steam before the offer expires.\r\n3. That's it! Have fun!"
+        open_giveaway_url:
+          type: string
+          format: uri
+          description: Tracked redirect URL that opens the upstream provider page for claiming the giveaway.
+          example: https://www.gamerpower.com/open/moonrise-fall-steam-giveaway
+        published_date:
+          type: string
+          description: Date and time the giveaway was published on GamerPower, in `YYYY-MM-DD HH:MM:SS` format (UTC).
+          example: '2026-05-30 13:57:19'
+        type:
+          type: string
+          description: Category of the offer (Game, DLC, Loot, Early Access, etc.).
+          example: Game
+        platforms:
+          type: string
+          description: Comma-separated list of human-readable platform names the offer applies to.
+          example: PC, Steam
+        end_date:
+          type: string
+          description: Date and time the giveaway expires, in `YYYY-MM-DD HH:MM:SS` format (UTC). May be `N/A` for offers without an explicit end date.
+          example: '2026-06-02 23:59:00'
+        users:
+          type: integer
+          description: Count of GamerPower users who have viewed or claimed the giveaway. Acts as a popularity signal.
+          example: 1310
+        status:
+          type: string
+          description: Lifecycle status of the giveaway.
+          enum:
+            - Active
+            - Expired
+          example: Active
+        gamerpower_url:
+          type: string
+          format: uri
+          description: Canonical GamerPower page URL for the giveaway.
+          example: https://www.gamerpower.com/moonrise-fall-steam-giveaway
+        open_giveaway:
+          type: string
+          format: uri
+          description: Alias of `open_giveaway_url`. Present on list responses; omitted on single-giveaway lookups.
+          example: https://www.gamerpower.com/open/moonrise-fall-steam-giveaway
+    GiveawayList:
+      type: array
+      description: An array of live Giveaway records.
+      items:
+        $ref: '#/components/schemas/Giveaway'
+    WorthEstimation:
+      type: object
+      description: Aggregate count and USD worth of currently live giveaways.
+      required:
+        - active_giveaways_number
+        - worth_estimation_usd
+      properties:
+        active_giveaways_number:
+          type: integer
+          description: Count of currently active giveaways.
+          example: 102
+        worth_estimation_usd:
+          type: string
+          description: Aggregate USD value of the live giveaway pool, formatted as a decimal string.
+          example: '410.83'
+    StatusEnvelope:
+      type: object
+      description: Status envelope returned when an endpoint returns no result, a not-found, or a server-side error.
+      required:
+        - status
+        - status_message
+      properties:
+        status:
+          type: integer
+          description: Numeric status code (0 indicates no result / not found).
+          example: 0
+        status_message:
+          type: string
+          description: Human-readable status message.
+          example: No object found, please check the correct parameters.
+    Platform:
+      type: string
+      description: Canonical platform slug accepted by the `platform` query parameter.
+      enum:
+        - pc
+        - steam
+        - epic-games-store
+        - ubisoft
+        - gog
+        - itchio
+        - ps4
+        - ps5
+        - xbox-one
+        - xbox-series-xs
+        - switch
+        - android
+        - ios
+        - vr
+        - battlenet
+        - origin
+        - drm-free
+        - xbox-360
+    GiveawayType:
+      type: string
+      description: Type of giveaway filter value.
+      enum:
+        - game
+        - loot
+        - beta
+    SortBy:
+      type: string
+      description: Sort key for giveaway list responses.
+      enum:
+        - date
+        - value
+        - popularity

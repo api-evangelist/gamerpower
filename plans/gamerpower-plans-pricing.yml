@@ -1,0 +1,98 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: GamerPower
+providerId: gamerpower
+created: '2026-05-30'
+modified: '2026-05-30'
+tags:
+  - Games And Comics
+  - Giveaways
+  - Free API
+description: Machine-readable plans and pricing for the GamerPower API. GamerPower exposes a single
+  free public tier with no authentication and a recommended ceiling of 4 requests per second per client.
+  Attribution to GamerPower.com is required for personal and commercial use. There is no paid tier
+  surfaced via the public docs; a third-party hosted offering exists via RapidAPI for users who want
+  CORS, a managed key, or SLA-style support.
+plans:
+  - id: gamerpower-free-public
+    name: Free (Public, Direct)
+    type: free
+    description: The public, no-authentication GamerPower API surface. Free for personal and commercial
+      use; attribution to GamerPower.com is required. Recommended client-side ceiling is 4 requests per
+      second to avoid throttling.
+    entries:
+      - label: API Requests
+        description: Unmetered request volume subject to fair-use throttling.
+        name: api_requests
+        type: quota
+        metric: requests
+        limit: -1
+        timeFrame: month
+        geo: global
+        domains:
+          - https://www.gamerpower.com/api
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: Rate Limit (Recommended)
+        description: Recommended client-side request ceiling per the public documentation.
+        name: rate_limit
+        type: rate
+        metric: requests_per_second
+        limit: 4
+        timeFrame: second
+        geo: global
+        domains:
+          - https://www.gamerpower.com/api
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+    elements:
+      - name: All Public Endpoints
+      - name: Giveaways
+      - name: Filter
+      - name: Worth
+      - name: No Authentication
+      - name: Attribution Required
+  - id: gamerpower-rapidapi-marketplace
+    name: RapidAPI Marketplace (3rd-Party)
+    type: paid
+    description: GamerPower is also available via RapidAPI under digiwalls/api/gamerpower, which adds
+      managed API keys, CORS support, and marketplace-tier rate limits and pricing. Pricing tiers and
+      exact limits are set by RapidAPI and may change; treat the values here as a placeholder pointer.
+    entries:
+      - label: API Requests
+        description: Tiered monthly request quota set by RapidAPI.
+        name: api_requests
+        type: quota
+        metric: requests
+        limit: -1
+        timeFrame: month
+        geo: global
+        domains:
+          - https://rapidapi.com/digiwalls/api/gamerpower
+        unit: 1
+        price: TBD
+        userMultiplied: false
+      - label: Rate Limit
+        description: Tiered rate limit set by RapidAPI.
+        name: rate_limit
+        type: rate
+        metric: requests_per_second
+        limit: -1
+        timeFrame: second
+        geo: global
+        domains:
+          - https://rapidapi.com/digiwalls/api/gamerpower
+        unit: 1
+        price: TBD
+        userMultiplied: false
+    elements:
+      - name: Managed API Key
+      - name: CORS Support
+      - name: Marketplace Billing
+      - name: Tier-Based Quotas
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

@@ -1,0 +1,238 @@
+vocabulary: '1.0.0'
+
+info:
+  provider: GamerPower
+  description: >-
+    Unified vocabulary for the GamerPower API covering the operational dimension
+    (paths, operations, parameters, schemas, enums) drawn from the OpenAPI
+    specification and the capability dimension (workflows, REST/MCP adapters,
+    personas) drawn from the Naftiko capability files. Cross-references show
+    how operational resources connect to the customer-facing giveaway-discovery
+    workflows.
+  created: '2026-05-30'
+  modified: '2026-05-30'
+
+# OPERATIONAL DIMENSION (from OpenAPI gamerpower.yml)
+operational:
+  apis:
+    - name: GamerPower API
+      namespace: gamerpower
+      version: 1.0.0
+      baseUrl: https://www.gamerpower.com/api
+      status: active
+      license: GamerPower Attribution
+      authentication: none
+
+  resources:
+    - name: giveaways
+      api: gamerpower
+      domain: Giveaways
+      paths:
+        - /giveaways
+        - /giveaway
+      actions:
+        - list
+        - get
+    - name: filter
+      api: gamerpower
+      domain: Filter
+      paths:
+        - /filter
+      actions:
+        - filter
+    - name: worth
+      api: gamerpower
+      domain: Worth
+      paths:
+        - /worth
+      actions:
+        - aggregate
+
+  actions:
+    - name: list
+      method: GET
+      pattern: read
+      description: Enumerate live giveaways, optionally filtered by platform, type, or sort key.
+    - name: get
+      method: GET
+      pattern: read
+      description: Retrieve a single giveaway by its numeric id.
+    - name: filter
+      method: GET
+      pattern: read
+      description: Multi-value filtering by dot-separated platforms and types.
+    - name: aggregate
+      method: GET
+      pattern: read
+      description: Aggregate count and USD worth of the live giveaway pool.
+
+  schemas:
+    core:
+      - name: Giveaway
+        properties: [id, title, worth, thumbnail, image, description, instructions, open_giveaway_url, published_date, type, platforms, end_date, users, status, gamerpower_url, open_giveaway]
+        notes: A single live giveaway record (game, beta, DLC, or loot).
+      - name: GiveawayList
+        properties: []
+        notes: Array of Giveaway records.
+      - name: WorthEstimation
+        properties: [active_giveaways_number, worth_estimation_usd]
+        notes: Aggregate count and USD value of live giveaways.
+    envelopes:
+      - name: StatusEnvelope
+        properties: [status, status_message]
+        notes: Status envelope returned for 201/404/500 conditions.
+
+  parameters:
+    queryFilters:
+      - name: platform
+        type: string
+        description: Platform slug filter (single-value on /giveaways; dot-separated on /filter).
+      - name: type
+        type: string
+        description: Giveaway-type filter (single-value on /giveaways; dot-separated on /filter).
+      - name: sort-by
+        type: string
+        description: Sort key — date, value, or popularity.
+    identifiers:
+      - name: id
+        type: integer
+        description: Numeric giveaway identifier on /giveaway.
+
+  enums:
+    platform:
+      - pc
+      - steam
+      - epic-games-store
+      - ubisoft
+      - gog
+      - itchio
+      - ps4
+      - ps5
+      - xbox-one
+      - xbox-series-xs
+      - switch
+      - android
+      - ios
+      - vr
+      - battlenet
+      - origin
+      - drm-free
+      - xbox-360
+    giveawayType:
+      - game
+      - loot
+      - beta
+    sortBy:
+      - date
+      - value
+      - popularity
+    status:
+      - Active
+      - Expired
+
+  authentication:
+    schemes: []
+    notes: The GamerPower API is fully open. No API key, token, or HTTP authentication is required. Recommended ceiling is 4 requests per second per client.
+
+# CAPABILITY DIMENSION (from Naftiko capability files)
+capability:
+  workflows:
+    - name: GamerPower — Giveaways
+      file: capabilities/gamerpower-giveaways.yaml
+      description: List live giveaways and look up a single giveaway by id.
+      apis: [gamerpower]
+      toolCount: 2
+      domains: [Giveaways]
+      personas: [gamingContentDeveloper, giveawayBotOperator]
+    - name: GamerPower — Filter
+      file: capabilities/gamerpower-filter.yaml
+      description: Multi-platform / multi-type giveaway filtering using dot-separated values.
+      apis: [gamerpower]
+      toolCount: 1
+      domains: [Filter]
+      personas: [gamingContentDeveloper, giveawayBotOperator]
+    - name: GamerPower — Worth
+      file: capabilities/gamerpower-worth.yaml
+      description: Aggregate live giveaway count and USD worth of the pool.
+      apis: [gamerpower]
+      toolCount: 1
+      domains: [Worth]
+      personas: [marketingAnalyst, giveawayBotOperator]
+
+  personas:
+    - id: gamingContentDeveloper
+      name: Gaming Content Developer
+      description: Builds player-facing apps, Discord bots, or RSS pipelines that surface live free-game offers.
+      workflows: [GamerPower — Giveaways, GamerPower — Filter]
+    - id: giveawayBotOperator
+      name: Giveaway Bot Operator
+      description: Operates a Discord/Telegram/Slack bot that pushes notifications when matching giveaways appear.
+      workflows: [GamerPower — Giveaways, GamerPower — Filter, GamerPower — Worth]
+    - id: marketingAnalyst
+      name: Marketing Analyst
+      description: Tracks the aggregate live USD value of free-game promotions for trend reporting.
+      workflows: [GamerPower — Worth]
+
+  domains:
+    - name: Giveaways
+      resources: [giveaways]
+      workflows: [GamerPower — Giveaways]
+    - name: Filter
+      resources: [filter]
+      workflows: [GamerPower — Filter]
+    - name: Worth
+      resources: [worth]
+      workflows: [GamerPower — Worth]
+
+  namespaces:
+    - kind: consumed
+      namespace: gamerpower-giveaways
+      baseUri: https://www.gamerpower.com/api
+    - kind: consumed
+      namespace: gamerpower-filter
+      baseUri: https://www.gamerpower.com/api
+    - kind: consumed
+      namespace: gamerpower-worth
+      baseUri: https://www.gamerpower.com/api
+    - kind: rest-exposed
+      namespace: gamerpower-giveaways-rest
+      port: 8080
+    - kind: rest-exposed
+      namespace: gamerpower-filter-rest
+      port: 8080
+    - kind: rest-exposed
+      namespace: gamerpower-worth-rest
+      port: 8080
+    - kind: mcp-exposed
+      namespace: gamerpower-giveaways-mcp
+      port: 9090
+    - kind: mcp-exposed
+      namespace: gamerpower-filter-mcp
+      port: 9090
+    - kind: mcp-exposed
+      namespace: gamerpower-worth-mcp
+      port: 9090
+
+  binds: []
+
+# CROSS-REFERENCE
+crossReference:
+  - resource: giveaways
+    api: gamerpower
+    operations:
+      - listGiveaways
+      - getGiveaway
+    workflows: [GamerPower — Giveaways]
+    personas: [gamingContentDeveloper, giveawayBotOperator]
+  - resource: filter
+    api: gamerpower
+    operations:
+      - filterGiveaways
+    workflows: [GamerPower — Filter]
+    personas: [gamingContentDeveloper, giveawayBotOperator]
+  - resource: worth
+    api: gamerpower
+    operations:
+      - getWorth
+    workflows: [GamerPower — Worth]
+    personas: [marketingAnalyst, giveawayBotOperator]

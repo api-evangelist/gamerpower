@@ -1,0 +1,112 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+provider: GamerPower
+providerId: gamerpower
+publisherName: GamerPower
+serviceCategory: API
+created: '2026-05-30'
+modified: '2026-05-30'
+tags:
+  - Games And Comics
+  - Giveaways
+  - FinOps
+  - Cost Management
+  - FOCUS
+description: FinOps framework definition for the GamerPower API. The direct public API is free with no
+  metered billing surface, so there is no provider invoice to allocate. This file captures the FOCUS
+  alignment for downstream tracking (consumer-side cost of integrating, RapidAPI marketplace charges,
+  and unit economics for consuming apps such as Discord bots or RSS pipelines).
+principles:
+  - name: Visibility
+    description: Even though the direct API is free, consumers should track per-call counts and consumer
+      attribution so they can demonstrate fair use and detect runaway loops.
+  - name: Allocation
+    description: Tag every chargeable RapidAPI call with the consuming team, environment, and bot/feature
+      so cost can be allocated when the marketplace tier is in use.
+  - name: Optimization
+    description: Cache list responses, batch lookups, and respect the 4 req/s ceiling to keep direct-API
+      usage well within fair use.
+  - name: Accountability
+    description: Establish budget owners for the RapidAPI marketplace subscription, if any.
+domains:
+  - name: Understand Usage and Cost
+    capabilities:
+      - Data Ingestion
+      - Allocation
+      - Reporting and Analytics
+      - Anomaly Management
+  - name: Quantify Business Value
+    capabilities:
+      - Planning and Estimating
+      - Forecasting
+      - Unit Economics
+  - name: Optimize Usage and Cost
+    capabilities:
+      - Rate Optimization
+      - Workload Optimization
+      - Licensing and SaaS
+  - name: Manage the FinOps Practice
+    capabilities:
+      - FinOps Practice Operations
+      - Invoicing and Chargeback
+billingModel:
+  pricingCategory: Free
+  billingFrequency: None
+  billingCurrency: USD
+  chargeCategories:
+    - Usage
+  chargeFrequency: None
+focusColumns:
+  ServiceName: GamerPower API
+  ServiceCategory: Developer Tools / API
+  ProviderName: GamerPower
+  PublisherName: GamerPower
+  InvoiceIssuerName: GamerPower
+  PricingCategory: Free
+  PricingUnit: request
+  BillingCurrency: USD
+  ChargeCategory: Usage
+meters:
+  - name: api_requests
+    description: Count of API requests made to the GamerPower endpoints.
+    unit: request
+    aggregation: sum
+    dimensions:
+      - api
+      - endpoint
+      - tier
+      - consumer
+  - name: data_egress
+    description: Bytes returned over the network in API responses.
+    unit: GB
+    aggregation: sum
+    dimensions:
+      - api
+      - consumer
+apis:
+  - name: GamerPower API
+    baseURL: https://www.gamerpower.com/api
+    tags:
+      - Games And Comics
+      - Giveaways
+    serviceName: GamerPower API
+    serviceCategory: API
+unitEconomics:
+  - name: Cost per 1K Requests (Direct)
+    metric: '0 (free)'
+    target: '0'
+  - name: Cost per 1K Requests (RapidAPI)
+    metric: rapidapi_billed_cost / (api_requests / 1000)
+    target: TBD
+  - name: Cost per Notified User
+    metric: billed_cost / notified_users
+    target: TBD
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

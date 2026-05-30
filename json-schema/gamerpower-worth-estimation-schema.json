@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-schema/gamerpower-worth-estimation-schema.json",
+  "title": "WorthEstimation",
+  "description": "Aggregate count and USD worth of currently live giveaways.",
+  "type": "object",
+  "required": ["active_giveaways_number", "worth_estimation_usd"],
+  "properties": {
+    "active_giveaways_number": {
+      "type": "integer",
+      "description": "Count of currently active giveaways.",
+      "example": 102
+    },
+    "worth_estimation_usd": {
+      "type": "string",
+      "description": "Aggregate USD value of the live giveaway pool, formatted as a decimal string.",
+      "example": "410.83"
+    }
+  }
+}

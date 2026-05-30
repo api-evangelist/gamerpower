@@ -1,0 +1,31 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "gp": "https://www.gamerpower.com/vocab/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "Giveaway": "gp:Giveaway",
+    "WorthEstimation": "gp:WorthEstimation",
+    "StatusEnvelope": "gp:StatusEnvelope",
+    "id": "schema:identifier",
+    "title": "schema:name",
+    "description": "schema:description",
+    "thumbnail": {"@id": "schema:thumbnailUrl", "@type": "@id"},
+    "image": {"@id": "schema:image", "@type": "@id"},
+    "instructions": "gp:instructions",
+    "open_giveaway_url": {"@id": "gp:openGiveawayUrl", "@type": "@id"},
+    "open_giveaway": {"@id": "gp:openGiveaway", "@type": "@id"},
+    "gamerpower_url": {"@id": "schema:url", "@type": "@id"},
+    "published_date": {"@id": "schema:datePublished", "@type": "xsd:dateTime"},
+    "end_date": {"@id": "schema:validThrough", "@type": "xsd:dateTime"},
+    "type": "gp:giveawayType",
+    "platforms": "schema:gamePlatform",
+    "users": {"@id": "gp:userCount", "@type": "xsd:integer"},
+    "status": "gp:status",
+    "worth": "gp:worth",
+    "active_giveaways_number": {"@id": "gp:activeGiveawaysNumber", "@type": "xsd:integer"},
+    "worth_estimation_usd": "gp:worthEstimationUsd",
+    "status_message": "gp:statusMessage"
+  }
+}
