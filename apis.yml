@@ -1,18 +1,18 @@
 aid: gamerpower
 name: GamerPower
-description: GamerPower is a free, no-authentication REST API that aggregates live
-  game giveaways across PC, console, mobile, VR, and DRM-free platforms — tracking
-  free games, beta keys, DLC drops, and in-game loot offers from Steam, Epic Games
-  Store, GOG, Ubisoft Connect, EA Origin, itch.io, Battle.net, PlayStation, Xbox,
-  Switch, Android, iOS, and VR storefronts. Multi-value platform/type filtering,
-  date/value/popularity sorting, and aggregate USD worth estimation are exposed.
+description: >-
+  GamerPower is a free, no-authentication REST API that aggregates live game giveaways across PC, console, mobile, VR,
+  and DRM-free platforms — tracking free games, beta keys, DLC drops, and in-game loot offers from Steam, Epic Games
+  Store, GOG, Ubisoft Connect, EA Origin, itch.io, Battle.net, PlayStation, Xbox, Switch, Android, iOS, and VR
+  storefronts. Multi-value platform/type filtering, date/value/popularity sorting, and aggregate USD worth estimation
+  are exposed.
 url: https://www.gamerpower.com/api-read
 specificationVersion: '0.20'
 created: '2026-05-28'
 modified: '2026-05-30'
 x-source: public-apis/public-apis
 x-type: company
-x-category: "Games & Comics"
+x-category: Games & Comics
 x-tier: 3
 x-tier-reason: bulk-registered-from-public-apis
 tags:
@@ -23,9 +23,9 @@ tags:
 apis:
   - aid: gamerpower:gamerpower
     name: GamerPower API
-    description: Free REST API aggregating live game giveaways, beta keys, DLC drops,
-      and in-game loot offers across 18 gaming platforms. JSON responses, no authentication,
-      multi-value filtering, and aggregate USD worth estimation.
+    description: >-
+      Free REST API aggregating live game giveaways, beta keys, DLC drops, and in-game loot offers across 18 gaming
+      platforms. JSON responses, no authentication, multi-value filtering, and aggregate USD worth estimation.
     humanURL: https://www.gamerpower.com/api-read
     baseURL: https://www.gamerpower.com/api
     tags:
@@ -40,43 +40,49 @@ apis:
       - type: Rules
         url: https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/rules/gamerpower-rules.yml
       - type: JSONSchema
-        url: https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-schema/gamerpower-giveaway-schema.json
+        url: >-
+          https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-schema/gamerpower-giveaway-schema.json
       - type: JSONSchema
-        url: https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-schema/gamerpower-giveaway-list-schema.json
+        url: >-
+          https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-schema/gamerpower-giveaway-list-schema.json
       - type: JSONSchema
-        url: https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-schema/gamerpower-worth-estimation-schema.json
+        url: >-
+          https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-schema/gamerpower-worth-estimation-schema.json
       - type: JSONSchema
-        url: https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-schema/gamerpower-status-envelope-schema.json
+        url: >-
+          https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-schema/gamerpower-status-envelope-schema.json
       - type: JSONStructure
-        url: https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-structure/gamerpower-giveaway-structure.json
+        url: >-
+          https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-structure/gamerpower-giveaway-structure.json
       - type: JSONStructure
-        url: https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-structure/gamerpower-worth-estimation-structure.json
+        url: >-
+          https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-structure/gamerpower-worth-estimation-structure.json
       - type: JSONStructure
-        url: https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-structure/gamerpower-status-envelope-structure.json
+        url: >-
+          https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-structure/gamerpower-status-envelope-structure.json
       - type: JSONLD
         url: https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-ld/gamerpower.jsonld
       - type: JSONLDContext
         url: https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-ld/gamerpower-context.jsonld
       - type: Example
-        url: https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/examples/gamerpower-giveaway-example.json
+        url: >-
+          https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/examples/gamerpower-giveaway-example.json
       - type: Example
-        url: https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/examples/gamerpower-giveaway-list-example.json
+        url: >-
+          https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/examples/gamerpower-giveaway-list-example.json
       - type: Example
-        url: https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/examples/gamerpower-worth-estimation-example.json
+        url: >-
+          https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/examples/gamerpower-worth-estimation-example.json
       - type: Example
-        url: https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/examples/gamerpower-status-envelope-example.json
+        url: >-
+          https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/examples/gamerpower-status-envelope-example.json
       - type: Vocabulary
         url: https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/vocabulary/gamerpower.yml
-      - type: NaftikoCapability
-        url: capabilities/gamerpower-giveaways.yaml
-      - type: NaftikoCapability
-        url: capabilities/gamerpower-filter.yaml
-      - type: NaftikoCapability
-        url: capabilities/gamerpower-worth.yaml
       - type: Plans
         url: https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/plans/gamerpower-plans-pricing.yml
       - type: RateLimits
-        url: https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/rate-limits/gamerpower-rate-limits.yml
+        url: >-
+          https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/rate-limits/gamerpower-rate-limits.yml
       - type: FinOps
         url: https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/finops/gamerpower-finops.yml
       - type: Authentication
@@ -106,16 +112,19 @@ features:
   - name: No Authentication
     description: Fully open API; no key, token, or login required to consume any endpoint.
   - name: 18 Gaming Platforms
-    description: Coverage of PC, Steam, Epic Games Store, GOG, Ubisoft, Origin, Battle.net,
-      itch.io, PS4, PS5, Xbox One, Xbox Series X|S, Xbox 360, Switch, Android, iOS, VR, and DRM-Free.
+    description: >-
+      Coverage of PC, Steam, Epic Games Store, GOG, Ubisoft, Origin, Battle.net, itch.io, PS4, PS5, Xbox One, Xbox
+      Series X|S, Xbox 360, Switch, Android, iOS, VR, and DRM-Free.
   - name: Multi-Value Filtering
-    description: The /filter endpoint accepts dot-separated platform and type lists
-      for combined queries like "Epic Games OR Steam" and "Game OR Loot".
+    description: >-
+      The /filter endpoint accepts dot-separated platform and type lists for combined queries like "Epic Games OR Steam"
+      and "Game OR Loot".
   - name: Sort By Date / Value / Popularity
     description: Built-in sort-by query parameter on /giveaways and /filter.
   - name: Worth Aggregation
-    description: The /worth endpoint returns a live count and total USD value of the
-      active giveaway pool — useful for marketing and trend dashboards.
+    description: >-
+      The /worth endpoint returns a live count and total USD value of the active giveaway pool — useful for marketing
+      and trend dashboards.
   - name: Free For Personal And Commercial Use
     description: Attribution to GamerPower.com is the only requirement.
 useCases:
