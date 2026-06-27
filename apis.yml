@@ -64,16 +64,16 @@ apis:
         url: https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-ld/gamerpower.jsonld
       - type: JSONLDContext
         url: https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-ld/gamerpower-context.jsonld
-      - type: Example
+      - type: Examples
         url: >-
           https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/examples/gamerpower-giveaway-example.json
-      - type: Example
+      - type: Examples
         url: >-
           https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/examples/gamerpower-giveaway-list-example.json
-      - type: Example
+      - type: Examples
         url: >-
           https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/examples/gamerpower-worth-estimation-example.json
-      - type: Example
+      - type: Examples
         url: >-
           https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/examples/gamerpower-status-envelope-example.json
       - type: Vocabulary
