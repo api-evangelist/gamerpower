@@ -90,6 +90,8 @@ apis:
       - type: RateLimits
         url: https://www.gamerpower.com/api-read
 common:
+  - type: DomainSecurity
+    url: security/gamerpower-domain-security.yml
   - type: Website
     url: https://www.gamerpower.com
   - type: Documentation
