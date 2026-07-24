@@ -1,0 +1,82 @@
+openapi: 3.1.0
+info:
+  title: GamerPower Filter Worth API
+  description: 'The GamerPower API (gamerpower.com) is a free, no-authentication REST API that
+
+    aggregates live game giveaways across PC, console, mobile, and DRM-free platforms.
+
+    It tracks free games, beta keys, DLC drops, and in-game loot offers from sources
+
+    such as Steam, Epic Games Store, GOG, Ubisoft Connect, EA Origin, itch.io, Battle.net,
+
+    PlayStation, Xbox, Switch, Android, iOS, and VR. The API returns JSON, supports
+
+    multi-value platform/type filtering, sorts by date/value/popularity, and exposes
+
+    a `/worth` endpoint that aggregates the live USD value of the active giveaway pool.
+
+    Attribution to GamerPower.com is required for personal and commercial use.
+
+    '
+  version: 1.0.0
+  contact:
+    name: GamerPower
+    url: https://www.gamerpower.com/api-read
+  license:
+    name: GamerPower Attribution
+    url: https://www.gamerpower.com/api-read
+  x-generated-from: documentation+live-api
+  x-source-url: https://www.gamerpower.com/api-read
+  x-last-validated: '2026-05-30'
+servers:
+- url: https://www.gamerpower.com/api
+  description: GamerPower production API
+tags:
+- name: Worth
+  description: Aggregate live giveaway counts and USD value estimation.
+paths:
+  /worth:
+    get:
+      tags:
+      - Worth
+      summary: GamerPower Get Total Worth Estimation
+      description: 'Returns the count of currently live giveaways and the aggregate USD value
+
+        estimation of the live giveaway pool.
+
+        '
+      operationId: getWorth
+      responses:
+        '200':
+          description: Aggregate count and USD worth of live giveaways.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorthEstimation'
+              examples:
+                GetWorth200Example:
+                  summary: Default getWorth 200 response
+                  x-microcks-default: true
+                  value:
+                    active_giveaways_number: 102
+                    worth_estimation_usd: '410.83'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    WorthEstimation:
+      type: object
+      description: Aggregate count and USD worth of currently live giveaways.
+      required:
+      - active_giveaways_number
+      - worth_estimation_usd
+      properties:
+        active_giveaways_number:
+          type: integer
+          description: Count of currently active giveaways.
+          example: 102
+        worth_estimation_usd:
+          type: string
+          description: Aggregate USD value of the live giveaway pool, formatted as a decimal string.
+          example: '410.83'
