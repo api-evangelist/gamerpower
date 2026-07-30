@@ -1,4 +1,17 @@
 aid: gamerpower
+accessModel:
+  pricing: free
+  onboarding: open
+  trial: false
+  try_now: true
+  public: true
+  label: Free · Open access
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/gamerpower.png
 name: GamerPower
 description: >-
   GamerPower is a free, no-authentication REST API that aggregates live game giveaways across PC, console, mobile, VR,
@@ -21,74 +34,216 @@ tags:
   - Free Games
   - Public APIs
 apis:
-  - aid: gamerpower:gamerpower
-    name: GamerPower API
-    description: >-
-      Free REST API aggregating live game giveaways, beta keys, DLC drops, and in-game loot offers across 18 gaming
-      platforms. JSON responses, no authentication, multi-value filtering, and aggregate USD worth estimation.
-    humanURL: https://www.gamerpower.com/api-read
-    baseURL: https://www.gamerpower.com/api
-    tags:
-      - Games And Comics
-      - Giveaways
-      - Free Games
-    properties:
-      - type: Documentation
-        url: https://www.gamerpower.com/api-read
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/openapi/gamerpower.yml
-      - type: Rules
-        url: https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/rules/gamerpower-rules.yml
-      - type: JSONSchema
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-schema/gamerpower-giveaway-schema.json
-      - type: JSONSchema
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-schema/gamerpower-giveaway-list-schema.json
-      - type: JSONSchema
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-schema/gamerpower-worth-estimation-schema.json
-      - type: JSONSchema
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-schema/gamerpower-status-envelope-schema.json
-      - type: JSONStructure
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-structure/gamerpower-giveaway-structure.json
-      - type: JSONStructure
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-structure/gamerpower-worth-estimation-structure.json
-      - type: JSONStructure
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-structure/gamerpower-status-envelope-structure.json
-      - type: JSONLD
-        url: https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-ld/gamerpower.jsonld
-      - type: JSONLDContext
-        url: https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-ld/gamerpower-context.jsonld
-      - type: Examples
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/examples/gamerpower-giveaway-example.json
-      - type: Examples
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/examples/gamerpower-giveaway-list-example.json
-      - type: Examples
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/examples/gamerpower-worth-estimation-example.json
-      - type: Examples
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/examples/gamerpower-status-envelope-example.json
-      - type: Vocabulary
-        url: https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/vocabulary/gamerpower.yml
-      - type: Plans
-        url: https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/plans/gamerpower-plans-pricing.yml
-      - type: RateLimits
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/rate-limits/gamerpower-rate-limits.yml
-      - type: FinOps
-        url: https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/finops/gamerpower-finops.yml
-      - type: Authentication
-        url: https://www.gamerpower.com/api-read
-      - type: RateLimits
-        url: https://www.gamerpower.com/api-read
+- aid: gamerpower:gamerpower-filter-api
+  name: GamerPower Filter API
+  description: Multi-value platform and type filtering using dot-separated values.
+  humanURL: https://www.gamerpower.com/api-read
+  baseURL: https://www.gamerpower.com/api
+  tags:
+  - Filter
+  properties:
+  - type: OpenAPI
+    url: openapi/gamerpower-filter-api-openapi.yml
+  - type: Documentation
+    url: https://www.gamerpower.com/api-read
+  - type: Rules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/rules/gamerpower-rules.yml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-schema/gamerpower-giveaway-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-schema/gamerpower-giveaway-list-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-schema/gamerpower-worth-estimation-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-schema/gamerpower-status-envelope-schema.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-structure/gamerpower-giveaway-structure.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-structure/gamerpower-worth-estimation-structure.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-structure/gamerpower-status-envelope-structure.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-ld/gamerpower.jsonld
+  - type: JSONLDContext
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-ld/gamerpower-context.jsonld
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/examples/gamerpower-giveaway-example.json
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/examples/gamerpower-giveaway-list-example.json
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/examples/gamerpower-worth-estimation-example.json
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/examples/gamerpower-status-envelope-example.json
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/vocabulary/gamerpower.yml
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/plans/gamerpower-plans-pricing.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/rate-limits/gamerpower-rate-limits.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/finops/gamerpower-finops.yml
+  - type: Authentication
+    url: https://www.gamerpower.com/api-read
+  - type: RateLimits
+    url: https://www.gamerpower.com/api-read
+- aid: gamerpower:gamerpower-giveaways-api
+  name: GamerPower Giveaways API
+  description: List and look up live game giveaways, beta keys, DLC drops, and loot offers.
+  humanURL: https://www.gamerpower.com/api-read
+  baseURL: https://www.gamerpower.com/api
+  tags:
+  - Giveaways
+  properties:
+  - type: OpenAPI
+    url: openapi/gamerpower-giveaways-api-openapi.yml
+  - type: Documentation
+    url: https://www.gamerpower.com/api-read
+  - type: Rules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/rules/gamerpower-rules.yml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-schema/gamerpower-giveaway-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-schema/gamerpower-giveaway-list-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-schema/gamerpower-worth-estimation-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-schema/gamerpower-status-envelope-schema.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-structure/gamerpower-giveaway-structure.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-structure/gamerpower-worth-estimation-structure.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-structure/gamerpower-status-envelope-structure.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-ld/gamerpower.jsonld
+  - type: JSONLDContext
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-ld/gamerpower-context.jsonld
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/examples/gamerpower-giveaway-example.json
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/examples/gamerpower-giveaway-list-example.json
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/examples/gamerpower-worth-estimation-example.json
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/examples/gamerpower-status-envelope-example.json
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/vocabulary/gamerpower.yml
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/plans/gamerpower-plans-pricing.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/rate-limits/gamerpower-rate-limits.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/finops/gamerpower-finops.yml
+  - type: Authentication
+    url: https://www.gamerpower.com/api-read
+  - type: RateLimits
+    url: https://www.gamerpower.com/api-read
+- aid: gamerpower:gamerpower-worth-api
+  name: GamerPower Worth API
+  description: Aggregate live giveaway counts and USD value estimation.
+  humanURL: https://www.gamerpower.com/api-read
+  baseURL: https://www.gamerpower.com/api
+  tags:
+  - Worth
+  properties:
+  - type: OpenAPI
+    url: openapi/gamerpower-worth-api-openapi.yml
+  - type: Documentation
+    url: https://www.gamerpower.com/api-read
+  - type: Rules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/rules/gamerpower-rules.yml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-schema/gamerpower-giveaway-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-schema/gamerpower-giveaway-list-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-schema/gamerpower-worth-estimation-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-schema/gamerpower-status-envelope-schema.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-structure/gamerpower-giveaway-structure.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-structure/gamerpower-worth-estimation-structure.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-structure/gamerpower-status-envelope-structure.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-ld/gamerpower.jsonld
+  - type: JSONLDContext
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/json-ld/gamerpower-context.jsonld
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/examples/gamerpower-giveaway-example.json
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/examples/gamerpower-giveaway-list-example.json
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/examples/gamerpower-worth-estimation-example.json
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/examples/gamerpower-status-envelope-example.json
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/vocabulary/gamerpower.yml
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/plans/gamerpower-plans-pricing.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/rate-limits/gamerpower-rate-limits.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/gamerpower/refs/heads/main/finops/gamerpower-finops.yml
+  - type: Authentication
+    url: https://www.gamerpower.com/api-read
+  - type: RateLimits
+    url: https://www.gamerpower.com/api-read
 common:
   - type: AgenticAccess
     url: agentic-access/gamerpower-agentic-access.yml
