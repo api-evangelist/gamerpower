@@ -1,0 +1,18 @@
+{
+  "provider": "gamerpower",
+  "sources": [
+    "gamerpower-filter-api-openapi.yml",
+    "gamerpower-giveaways-api-openapi.yml",
+    "gamerpower-worth-api-openapi.yml"
+  ],
+  "outputs": [
+    "gamerpower-filter-api-openapi.yml",
+    "gamerpower-giveaways-api-openapi.yml",
+    "gamerpower-worth-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
