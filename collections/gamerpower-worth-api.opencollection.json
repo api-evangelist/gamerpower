@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GamerPower Filter Worth API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Worth",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GamerPower Get Total Worth Estimation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.gamerpower.com/api/worth"
+          },
+          "docs": "Returns the count of currently live giveaways and the aggregate USD value\nestimation of the live giveaway pool.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

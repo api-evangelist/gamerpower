@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GamerPower Filter Giveaways API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Giveaways",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GamerPower List Giveaways",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.gamerpower.com/api/giveaways",
+            "params": [
+              {
+                "name": "platform",
+                "value": "epic-games-store",
+                "type": "query",
+                "description": "Filter giveaways by single platform."
+              },
+              {
+                "name": "type",
+                "value": "game",
+                "type": "query",
+                "description": "Filter giveaways by giveaway type."
+              },
+              {
+                "name": "sort-by",
+                "value": "value",
+                "type": "query",
+                "description": "Sort the returned giveaways."
+              }
+            ]
+          },
+          "docs": "Returns all currently live giveaways. Supports optional filtering by `platform`\nand `type` (single-value here; use `/filter` for multi-value), and sorting via\n`sort-by`.\n"
+        },
+        {
+          "info": {
+            "name": "GamerPower Get Giveaway By ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.gamerpower.com/api/giveaway",
+            "params": [
+              {
+                "name": "id",
+                "value": "3664",
+                "type": "query",
+                "description": "Numeric identifier of the giveaway."
+              }
+            ]
+          },
+          "docs": "Returns the details of a single giveaway identified by its numeric id."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

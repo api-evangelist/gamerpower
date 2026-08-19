@@ -1,0 +1,182 @@
+{
+  "item": [
+    {
+      "id": "7e7c3afa-a9e1-4926-bc5c-da34530c3763",
+      "name": "Filter",
+      "description": {
+        "content": "Multi-value platform and type filtering using dot-separated values.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7650c77c-be63-44cb-98a1-aceb199d583d",
+          "name": "GamerPower Filter Giveaways By Multiple Values",
+          "request": {
+            "name": "GamerPower Filter Giveaways By Multiple Values",
+            "description": {
+              "content": "Returns live giveaways filtered by one or more platforms and one or more\ngiveaway types. Multiple values are dot-separated (e.g. `platform=epic-games-store.steam`\nand `type=game.loot`).\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "filter"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "platform",
+                  "value": "<string>",
+                  "description": "Dot-separated list of platforms (e.g. `epic-games-store.steam`)."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Dot-separated list of giveaway types (e.g. `game.loot`)."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort-by",
+                  "value": "<string>",
+                  "description": "Sort the returned giveaways."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6247621b-8bb6-4d06-9f28-1dd306564d5d",
+              "name": "An array of filtered live giveaways.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "platform",
+                      "value": "epic-games-store.steam"
+                    },
+                    {
+                      "key": "type",
+                      "value": "game.loot"
+                    },
+                    {
+                      "key": "sort-by",
+                      "value": "date"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 3664,\n    \"title\": \"Moonrise Fall (Steam) Giveaway\",\n    \"worth\": \"$9.99\",\n    \"thumbnail\": \"https://www.gamerpower.com/offers/1/6a1b24ffbbc52.jpg\",\n    \"image\": \"https://www.gamerpower.com/offers/1b/6a1b24ffbbc52.jpg\",\n    \"description\": \"Download Moonrise Fall for free on Steam until June 2!\",\n    \"instructions\": \"1. Click the button to visit the giveaway page.\",\n    \"open_giveaway_url\": \"https://www.gamerpower.com/open/moonrise-fall-steam-giveaway\",\n    \"published_date\": \"2026-05-30 13:57:19\",\n    \"type\": \"Game\",\n    \"platforms\": \"PC, Steam\",\n    \"end_date\": \"2026-06-02 23:59:00\",\n    \"users\": 1310,\n    \"status\": \"Active\",\n    \"gamerpower_url\": \"https://www.gamerpower.com/moonrise-fall-steam-giveaway\",\n    \"open_giveaway\": \"https://www.gamerpower.com/open/moonrise-fall-steam-giveaway\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b4333603-7879-4fab-ba0e-0643eea91472",
+              "name": "No giveaways matched the filter.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "platform",
+                      "value": "epic-games-store.steam"
+                    },
+                    {
+                      "key": "type",
+                      "value": "game.loot"
+                    },
+                    {
+                      "key": "sort-by",
+                      "value": "date"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 0,\n  \"status_message\": \"No object found, please check the correct parameters.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.gamerpower.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2abd0933-5fe6-4c51-b253-e536f2b0d238",
+    "name": "GamerPower Filter API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The GamerPower API (gamerpower.com) is a free, no-authentication REST API that\naggregates live game giveaways across PC, console, mobile, and DRM-free platforms.\nIt tracks free games, beta keys, DLC drops, and in-game loot offers from sources\nsuch as Steam, Epic Games Store, GOG, Ubisoft Connect, EA Origin, itch.io, Battle.net,\nPlayStation, Xbox, Switch, Android, iOS, and VR. The API returns JSON, supports\nmulti-value platform/type filtering, sorts by date/value/popularity, and exposes\na `/worth` endpoint that aggregates the live USD value of the active giveaway pool.\nAttribution to GamerPower.com is required for personal and commercial use.\n\n\nContact Support:\n Name: GamerPower",
+      "type": "text/plain"
+    }
+  }
+}
