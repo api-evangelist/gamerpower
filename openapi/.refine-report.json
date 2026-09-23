@@ -1,9 +1,7 @@
 {
   "provider": "gamerpower",
   "sources": [
-    "gamerpower-filter-api-openapi.yml",
-    "gamerpower-giveaways-api-openapi.yml",
-    "gamerpower-worth-api-openapi.yml"
+    "_ae-authored/gamerpower.yml"
   ],
   "outputs": [
     "gamerpower-filter-api-openapi.yml",
@@ -14,10 +12,13 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "gamerpower-filter-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "gamerpower-giveaways-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "gamerpower-worth-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (0 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "gamerpower.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "gamerpower-filter-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "gamerpower-giveaways-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "gamerpower-worth-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

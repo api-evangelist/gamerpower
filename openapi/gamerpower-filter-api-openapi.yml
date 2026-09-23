@@ -3,21 +3,7 @@ info:
   title: GamerPower Filter API
   description: 'The GamerPower API (gamerpower.com) is a free, no-authentication REST API that
 
-    aggregates live game giveaways across PC, console, mobile, and DRM-free platforms.
-
-    It tracks free games, beta keys, DLC drops, and in-game loot offers from sources
-
-    such as Steam, Epic Games Store, GOG, Ubisoft Connect, EA Origin, itch.io, Battle.net,
-
-    PlayStation, Xbox, Switch, Android, iOS, and VR. The API returns JSON, supports
-
-    multi-value platform/type filtering, sorts by date/value/popularity, and exposes
-
-    a `/worth` endpoint that aggregates the live USD value of the active giveaway pool.
-
-    Attribution to GamerPower.com is required for personal and commercial use.
-
-    '
+    aggregates live game giveaways across PC, console, mobile, and DRM-free platforms.'
   version: 1.0.0
   contact:
     name: GamerPower
@@ -44,9 +30,7 @@ paths:
 
         giveaway types. Multiple values are dot-separated (e.g. `platform=epic-games-store.steam`
 
-        and `type=game.loot`).
-
-        '
+        and `type=game.loot`).'
       operationId: filterGiveaways
       parameters:
       - name: platform
@@ -111,13 +95,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    SortBy:
-      type: string
-      description: Sort key for giveaway list responses.
-      enum:
-      - date
-      - value
-      - popularity
     Giveaway:
       type: object
       description: A single live giveaway record (free game, beta key, DLC, or loot offer).
@@ -214,6 +191,18 @@ components:
           format: uri
           description: Alias of `open_giveaway_url`. Present on list responses; omitted on single-giveaway lookups.
           example: https://www.gamerpower.com/open/moonrise-fall-steam-giveaway
+    SortBy:
+      type: string
+      description: Sort key for giveaway list responses.
+      enum:
+      - date
+      - value
+      - popularity
+    GiveawayList:
+      type: array
+      description: An array of live Giveaway records.
+      items:
+        $ref: '#/components/schemas/Giveaway'
     StatusEnvelope:
       type: object
       description: Status envelope returned when an endpoint returns no result, a not-found, or a server-side error.
@@ -229,8 +218,3 @@ components:
           type: string
           description: Human-readable status message.
           example: No object found, please check the correct parameters.
-    GiveawayList:
-      type: array
-      description: An array of live Giveaway records.
-      items:
-        $ref: '#/components/schemas/Giveaway'

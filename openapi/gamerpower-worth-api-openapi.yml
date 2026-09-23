@@ -1,23 +1,9 @@
 openapi: 3.2.0
 info:
-  title: GamerPower Filter Worth API
+  title: GamerPower Worth API
   description: 'The GamerPower API (gamerpower.com) is a free, no-authentication REST API that
 
-    aggregates live game giveaways across PC, console, mobile, and DRM-free platforms.
-
-    It tracks free games, beta keys, DLC drops, and in-game loot offers from sources
-
-    such as Steam, Epic Games Store, GOG, Ubisoft Connect, EA Origin, itch.io, Battle.net,
-
-    PlayStation, Xbox, Switch, Android, iOS, and VR. The API returns JSON, supports
-
-    multi-value platform/type filtering, sorts by date/value/popularity, and exposes
-
-    a `/worth` endpoint that aggregates the live USD value of the active giveaway pool.
-
-    Attribution to GamerPower.com is required for personal and commercial use.
-
-    '
+    aggregates live game giveaways across PC, console, mobile, and DRM-free platforms.'
   version: 1.0.0
   contact:
     name: GamerPower
@@ -42,9 +28,7 @@ paths:
       summary: GamerPower Get Total Worth Estimation
       description: 'Returns the count of currently live giveaways and the aggregate USD value
 
-        estimation of the live giveaway pool.
-
-        '
+        estimation of the live giveaway pool.'
       operationId: getWorth
       responses:
         '200':

@@ -1,23 +1,9 @@
 openapi: 3.2.0
 info:
-  title: GamerPower Filter Giveaways API
+  title: GamerPower Giveaways API
   description: 'The GamerPower API (gamerpower.com) is a free, no-authentication REST API that
 
-    aggregates live game giveaways across PC, console, mobile, and DRM-free platforms.
-
-    It tracks free games, beta keys, DLC drops, and in-game loot offers from sources
-
-    such as Steam, Epic Games Store, GOG, Ubisoft Connect, EA Origin, itch.io, Battle.net,
-
-    PlayStation, Xbox, Switch, Android, iOS, and VR. The API returns JSON, supports
-
-    multi-value platform/type filtering, sorts by date/value/popularity, and exposes
-
-    a `/worth` endpoint that aggregates the live USD value of the active giveaway pool.
-
-    Attribution to GamerPower.com is required for personal and commercial use.
-
-    '
+    aggregates live game giveaways across PC, console, mobile, and DRM-free platforms.'
   version: 1.0.0
   contact:
     name: GamerPower
@@ -44,9 +30,7 @@ paths:
 
         and `type` (single-value here; use `/filter` for multi-value), and sorting via
 
-        `sort-by`.
-
-        '
+        `sort-by`.'
       operationId: listGiveaways
       parameters:
       - name: platform
@@ -188,6 +172,55 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Platform:
+      type: string
+      description: Canonical platform slug accepted by the `platform` query parameter.
+      enum:
+      - pc
+      - steam
+      - epic-games-store
+      - ubisoft
+      - gog
+      - itchio
+      - ps4
+      - ps5
+      - xbox-one
+      - xbox-series-xs
+      - switch
+      - android
+      - ios
+      - vr
+      - battlenet
+      - origin
+      - drm-free
+      - xbox-360
+    SortBy:
+      type: string
+      description: Sort key for giveaway list responses.
+      enum:
+      - date
+      - value
+      - popularity
+    GiveawayList:
+      type: array
+      description: An array of live Giveaway records.
+      items:
+        $ref: '#/components/schemas/Giveaway'
+    StatusEnvelope:
+      type: object
+      description: Status envelope returned when an endpoint returns no result, a not-found, or a server-side error.
+      required:
+      - status
+      - status_message
+      properties:
+        status:
+          type: integer
+          description: Numeric status code (0 indicates no result / not found).
+          example: 0
+        status_message:
+          type: string
+          description: Human-readable status message.
+          example: No object found, please check the correct parameters.
     Giveaway:
       type: object
       description: A single live giveaway record (free game, beta key, DLC, or loot offer).
@@ -291,52 +324,3 @@ components:
       - game
       - loot
       - beta
-    GiveawayList:
-      type: array
-      description: An array of live Giveaway records.
-      items:
-        $ref: '#/components/schemas/Giveaway'
-    StatusEnvelope:
-      type: object
-      description: Status envelope returned when an endpoint returns no result, a not-found, or a server-side error.
-      required:
-      - status
-      - status_message
-      properties:
-        status:
-          type: integer
-          description: Numeric status code (0 indicates no result / not found).
-          example: 0
-        status_message:
-          type: string
-          description: Human-readable status message.
-          example: No object found, please check the correct parameters.
-    SortBy:
-      type: string
-      description: Sort key for giveaway list responses.
-      enum:
-      - date
-      - value
-      - popularity
-    Platform:
-      type: string
-      description: Canonical platform slug accepted by the `platform` query parameter.
-      enum:
-      - pc
-      - steam
-      - epic-games-store
-      - ubisoft
-      - gog
-      - itchio
-      - ps4
-      - ps5
-      - xbox-one
-      - xbox-series-xs
-      - switch
-      - android
-      - ios
-      - vr
-      - battlenet
-      - origin
-      - drm-free
-      - xbox-360
