@@ -191,13 +191,6 @@ components:
           format: uri
           description: Alias of `open_giveaway_url`. Present on list responses; omitted on single-giveaway lookups.
           example: https://www.gamerpower.com/open/moonrise-fall-steam-giveaway
-    SortBy:
-      type: string
-      description: Sort key for giveaway list responses.
-      enum:
-      - date
-      - value
-      - popularity
     GiveawayList:
       type: array
       description: An array of live Giveaway records.
@@ -218,3 +211,10 @@ components:
           type: string
           description: Human-readable status message.
           example: No object found, please check the correct parameters.
+    SortBy:
+      type: string
+      description: Sort key for giveaway list responses.
+      enum:
+      - date
+      - value
+      - popularity

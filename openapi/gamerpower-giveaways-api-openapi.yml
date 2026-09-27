@@ -172,28 +172,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Platform:
-      type: string
-      description: Canonical platform slug accepted by the `platform` query parameter.
-      enum:
-      - pc
-      - steam
-      - epic-games-store
-      - ubisoft
-      - gog
-      - itchio
-      - ps4
-      - ps5
-      - xbox-one
-      - xbox-series-xs
-      - switch
-      - android
-      - ios
-      - vr
-      - battlenet
-      - origin
-      - drm-free
-      - xbox-360
     SortBy:
       type: string
       description: Sort key for giveaway list responses.
@@ -201,26 +179,13 @@ components:
       - date
       - value
       - popularity
-    GiveawayList:
-      type: array
-      description: An array of live Giveaway records.
-      items:
-        $ref: '#/components/schemas/Giveaway'
-    StatusEnvelope:
-      type: object
-      description: Status envelope returned when an endpoint returns no result, a not-found, or a server-side error.
-      required:
-      - status
-      - status_message
-      properties:
-        status:
-          type: integer
-          description: Numeric status code (0 indicates no result / not found).
-          example: 0
-        status_message:
-          type: string
-          description: Human-readable status message.
-          example: No object found, please check the correct parameters.
+    GiveawayType:
+      type: string
+      description: Type of giveaway filter value.
+      enum:
+      - game
+      - loot
+      - beta
     Giveaway:
       type: object
       description: A single live giveaway record (free game, beta key, DLC, or loot offer).
@@ -317,10 +282,45 @@ components:
           format: uri
           description: Alias of `open_giveaway_url`. Present on list responses; omitted on single-giveaway lookups.
           example: https://www.gamerpower.com/open/moonrise-fall-steam-giveaway
-    GiveawayType:
+    StatusEnvelope:
+      type: object
+      description: Status envelope returned when an endpoint returns no result, a not-found, or a server-side error.
+      required:
+      - status
+      - status_message
+      properties:
+        status:
+          type: integer
+          description: Numeric status code (0 indicates no result / not found).
+          example: 0
+        status_message:
+          type: string
+          description: Human-readable status message.
+          example: No object found, please check the correct parameters.
+    Platform:
       type: string
-      description: Type of giveaway filter value.
+      description: Canonical platform slug accepted by the `platform` query parameter.
       enum:
-      - game
-      - loot
-      - beta
+      - pc
+      - steam
+      - epic-games-store
+      - ubisoft
+      - gog
+      - itchio
+      - ps4
+      - ps5
+      - xbox-one
+      - xbox-series-xs
+      - switch
+      - android
+      - ios
+      - vr
+      - battlenet
+      - origin
+      - drm-free
+      - xbox-360
+    GiveawayList:
+      type: array
+      description: An array of live Giveaway records.
+      items:
+        $ref: '#/components/schemas/Giveaway'
