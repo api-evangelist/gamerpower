@@ -95,6 +95,28 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    SortBy:
+      type: string
+      description: Sort key for giveaway list responses.
+      enum:
+      - date
+      - value
+      - popularity
+    StatusEnvelope:
+      type: object
+      description: Status envelope returned when an endpoint returns no result, a not-found, or a server-side error.
+      required:
+      - status
+      - status_message
+      properties:
+        status:
+          type: integer
+          description: Numeric status code (0 indicates no result / not found).
+          example: 0
+        status_message:
+          type: string
+          description: Human-readable status message.
+          example: No object found, please check the correct parameters.
     Giveaway:
       type: object
       description: A single live giveaway record (free game, beta key, DLC, or loot offer).
@@ -196,25 +218,3 @@ components:
       description: An array of live Giveaway records.
       items:
         $ref: '#/components/schemas/Giveaway'
-    StatusEnvelope:
-      type: object
-      description: Status envelope returned when an endpoint returns no result, a not-found, or a server-side error.
-      required:
-      - status
-      - status_message
-      properties:
-        status:
-          type: integer
-          description: Numeric status code (0 indicates no result / not found).
-          example: 0
-        status_message:
-          type: string
-          description: Human-readable status message.
-          example: No object found, please check the correct parameters.
-    SortBy:
-      type: string
-      description: Sort key for giveaway list responses.
-      enum:
-      - date
-      - value
-      - popularity
