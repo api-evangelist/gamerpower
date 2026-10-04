@@ -102,6 +102,11 @@ components:
       - date
       - value
       - popularity
+    GiveawayList:
+      type: array
+      description: An array of live Giveaway records.
+      items:
+        $ref: '#/components/schemas/Giveaway'
     StatusEnvelope:
       type: object
       description: Status envelope returned when an endpoint returns no result, a not-found, or a server-side error.
@@ -213,8 +218,3 @@ components:
           format: uri
           description: Alias of `open_giveaway_url`. Present on list responses; omitted on single-giveaway lookups.
           example: https://www.gamerpower.com/open/moonrise-fall-steam-giveaway
-    GiveawayList:
-      type: array
-      description: An array of live Giveaway records.
-      items:
-        $ref: '#/components/schemas/Giveaway'
