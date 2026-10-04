@@ -41,10 +41,11 @@ x-category: Games & Comics
 x-tier: 3
 x-tier-reason: bulk-registered-from-public-apis
 tags:
-  - Games And Comics
   - Giveaways
   - Free Games
   - Public APIs
+  - Gaming
+  - Video Games
 apis:
 - aid: gamerpower:gamerpower-filter-api
   name: GamerPower Filter API
@@ -321,3 +322,5 @@ integrations:
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-tags-removed:
+- Games And Comics
