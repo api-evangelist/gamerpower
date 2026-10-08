@@ -258,6 +258,12 @@ apis:
   - type: RateLimits
     url: https://www.gamerpower.com/api-read
 common:
+  - type: Plans
+    url: plans/gamerpower-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gamerpower-rate-limits.yml
+  - type: FinOps
+    url: finops/gamerpower-finops.yml
   - url: https://www.gamerpower.com/rss/giveaways
     type: BlogRSS
   - type: AgenticAccess
