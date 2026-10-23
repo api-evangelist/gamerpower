@@ -1,0 +1,26 @@
+generated: '2026-10-23'
+method: searched
+checked:
+- discord/integrations/discord-integration-edges.yml
+source:
+- discord/integrations/discord-integration-edges.yml
+edges:
+- partner_name: Discord (discord-app-directory)
+  partner: discord
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: discord-app-directory
+  evidence: https://discord.com/discovery/applications/1337483452634763355
+  mirror_of: discord/integrations/discord-integration-edges.yml
+  apps:
+  - GamerPower Bot
+  listing_count: 1
+  detected: '2026-10-23'
+  detected_by: mirror-platform-listings.py
+  category: Games, Moderation and Tools, Social
+  publisher_verified:
+  - discord-verified-app
